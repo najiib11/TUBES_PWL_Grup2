@@ -54,6 +54,6 @@
             <li>Check and update stock levels</li>
             <li>Prepare orders for shipping</li>
             <li>Organize warehouse layout</li>
-            
+
         </ul>
     </div>
