@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', ['role' => Auth::user()->name]);
+        return view('dashboard', ['role' => Auth::user()->name]);
     }
 }

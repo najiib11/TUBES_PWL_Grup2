@@ -10,4 +10,8 @@ class WarehouseController extends Controller
         return view("warehouse");
     }
 
+    public function inputData(){
+        return view("warehouse.input");
+    }
+
 }
