@@ -7,62 +7,90 @@ use App\Models\Product;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("index");
 
 Route::get('/dashboard', function () {
     $products = Product::all();
     return view('dashboard' , compact('products'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Route::middleware('auth')->group(function () {
+//     Route::get('{role}/profile', [ProfileController::class, 'index'])->name('profile.index');
+//     Route::get('{role}/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::delete('{role}/profile/save', [ProfileController::class, 'destroy'])->name('profile.save');
+// });
+
+Route::middleware('auth')->prefix("admin")->group(callback: function (){
+    Route::get("/", [AdminController::class, "index"])->name("admin.index");
+    Route::get("role",  [AdminController::class, "viewRole"])->name("role.edit");
+    Route::get("laporan", [AdminController::class, "viewLaporan"])->name("admin.laporan");
+    Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile.index');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::delete('profile/save', [ProfileController::class, 'destroy'])->name('admin.profile.save');
+
 });
 
-Route::middleware('auth')->group(callback: function (){
-    Route::get("admin", [AdminController::class, "index"])->name("admin.index");
-    Route::get("admin/role", action: [AdminController::class, "viewRole"])->name("role.edit");
-    Route::get("admin/laporan", [AdminController::class, "viewLaporan"])->name("admin.laporan");
-    Route::get("admin/pengaturan", [AdminController::class, "viewPengaturan"])->name("admin.pengaturan");
-
+Route::middleware("auth")->prefix("gudang")->group(function(){
+    Route::get("/", [WarehouseController::class, "index"])->name("gudang.index");
+    Route::get("input-data", [WarehouseController::class, "inputData"])->name("gudang.input");
+    Route::get('profile', [ProfileController::class, 'index'])->name('gudang.profile.index');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('gudang.profile.edit');
+    Route::delete('profile/save', [ProfileController::class, 'destroy'])->name('gudang.profile.save');
 });
+
+Route::middleware("auth")->prefix("kasir")->group(function(){
+    Route::get("/", [CashierController::class, "index"])->name("kasir.index");
+    Route::post("tambahData", [CashierController::class,"tambahData"])->name("kasir.tambah");
+    Route::get('profile', [ProfileController::class, 'index'])->name('kasir.profile.index');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('kasir.profile.edit');
+    Route::delete('profile/save', [ProfileController::class, 'destroy'])->name('kasir.profile.save');
+});
+
+Route::middleware("auth")->prefix("kepala_toko")->group(function(){
+    Route::get("/", [KepalaTokoController::class, "index"])->name("kepala_toko.index");
+    Route::get("inputStaf", [KepalaTokoController::class, "inputDataStaf"])->name("kepala_toko.input");
+    Route::get("proses", [KepalaTokoController::class, "inputDataProses"])->name("kepala_toko.proses");
+    Route::get('profile', [ProfileController::class, 'index'])->name('kepala_toko.profile.index');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('kepala_toko.profile.edit');
+    Route::delete('profile/save', [ProfileController::class, 'destroy'])->name('kepala_toko.profile.save');
+});
+
+Route::middleware("auth")->prefix("manager")->group(function(){
+    Route::get("/", [ManagerController::class, "index"])->name("manager.index");
+    Route::post("tambahData", [ManagerController::class,"tambahData"])->name("manager.tambah");
+    Route::get('profile', [ProfileController::class, 'index'])->name('manager.profile.index');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('manager.profile.edit');
+    Route::delete('profile/save', [ProfileController::class, 'destroy'])->name('manager.profile.save');
+});
+
+Route::middleware("auth")->prefix(  "supervisor")->group(function(){
+    Route::get("/", [SupervisorController::class, "index"])->name("supervisor.index");
+    Route::post("tambahData", [SupervisorController::class,"tambahData"])->name("supervisor.tambah");
+    Route::get('profile', [ProfileController::class, 'index'])->name('supervisor.profile.index');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('supervisor.profile.edit');
+    Route::delete('profile/save', [ProfileController::class, 'destroy'])->name('supervisor.profile.save');
+});
+
+// Route::middleware("auth")->group(function(){
+//     Route::get("profile", [ProfileController::class, "index"])->name("profile.index");
+//     Route::get("profile/edit", [ProfileController::class,"edit"])->name("profile.edit");
+//     Route::post("profile/edit/save", [ProfileController::class,"saveEdit"])->name("profile.save");
+
+// });
 
 Route::middleware("auth")->group(function(){
-    Route::get("gudang", [WarehouseController::class, "index"])->name("gudang.index");
-    Route::get("gudang/input-data", [WarehouseController::class, "inputData"])->name("gudang.input");
+    Route::get("logout", [AuthenticatedSessionController::class, "destroy"])->name("logout.user");
 });
-
-Route::middleware("auth")->group(function(){
-    Route::get("kasir", [CashierController::class, "index"])->name("kasir.index");
-    Route::post("kasir/tambahData", [CashierController::class,"tambahData"])->name("kasir.tambah");
-});
-
-Route::middleware("auth")->group(function(){
-    Route::get("kepala_toko", [KepalaTokoController::class, "index"])->name("kepala_toko.index");
-    Route::get("kepala_toko/inputStaf", [KepalaTokoController::class, "inputDataStaf"])->name("kepala_toko.input");
-    Route::get("kepala_toko/proses", [KepalaTokoController::class, "inputDataProses"])->name("kepala_toko.proses");
-});
-
-Route::middleware("auth")->group(function(){
-    Route::get("manager", [ManagerController::class, "index"])->name("manager.index");
-    Route::post("manager/tambahData", [ManagerController::class,"tambahData"])->name("manager.tambah");
-});
-
-Route::middleware("auth")->group(function(){
-    Route::get("supervisor", [SupervisorController::class, "index"])->name("supervisor.index");
-    Route::post("supervisor/tambahData", [SupervisorController::class,"tambahData"])->name("supervisor.tambah");
-});
-
 
 
 require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dasboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');

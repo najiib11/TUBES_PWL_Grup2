@@ -19,6 +19,6 @@ class AdminController extends Controller
     }
 
     public function viewPengaturan(){
-        return view("admin.pengaturan");
+        return view("profile");
     }
 }

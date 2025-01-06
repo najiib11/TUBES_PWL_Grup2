@@ -32,9 +32,14 @@
                             </div>
                         </button>
                     </x-slot>
+                    {{--
+                     dengan menggunakan prefix route untuk menentukan route role
+                     substr(request()->route()->getPrefix(), 1, strlen(request()->route()->getPrefix()) - 1)
+substr(request()->route()->getPrefix(), 1, strlen(request()->route()->getPrefix()) - 1)
+                     --}}
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route(Auth::user()->role.'.profile.index')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -80,7 +85,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+                <x-responsive-nav-link :href="route(Auth::user()->role.'.profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
