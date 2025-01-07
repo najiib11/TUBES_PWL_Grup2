@@ -33,7 +33,7 @@ Route::middleware('auth')->prefix("admin")->group(callback: function (){
     Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile.index');
     Route::get('profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
     Route::delete('profile/save', [ProfileController::class, 'destroy'])->name('admin.profile.save');
-
+    Route::get('list/user', [AdminController::class, 'listUser'])->name('admin.list.user');
 });
 
 Route::middleware("auth")->prefix("gudang")->group(function(){

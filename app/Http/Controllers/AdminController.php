@@ -21,4 +21,8 @@ class AdminController extends Controller
     public function viewPengaturan(){
         return view("profile");
     }
+
+    public function listUser(){
+        return view("admin.list_user");
+    }
 }
