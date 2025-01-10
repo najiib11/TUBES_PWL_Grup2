@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Kepala Toko') }}
+            {{ __('owner') }}
         </h2>
     </x-slot>
 
@@ -73,7 +73,7 @@
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <div class="flex justify-between">
                             <h2 class="text-xl font-bold">Kinerja Staf</h2>
-                            <a href="{{route('kepala_toko.input')}}" class="justify-self-end text-lg font-bold bg-green-400 hover:bg-green-600 hover:text-black px-4 py-1 rounded-lg -mt-2">Add Staf</a>
+                            <a href="{{route('owner.input')}}" class="justify-self-end text-lg font-bold bg-green-400 hover:bg-green-600 hover:text-black px-4 py-1 rounded-lg -mt-2">Add Staf</a>
                         </div>
 
                         <table class="w-full table-auto mt-1">
