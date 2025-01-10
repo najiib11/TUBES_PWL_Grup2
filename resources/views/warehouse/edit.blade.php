@@ -21,6 +21,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <div></div>
                                 <label for="hargaBarang">Harga Produk :</label>
                                 <input type="number" class="form-control" name="price" id="hargaBarang" >
                             </div>
