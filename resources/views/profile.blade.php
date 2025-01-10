@@ -6,16 +6,21 @@
     </x-slot>
     {{-- {{substr(request()->route()->getPrefix(), 1, strlen(request()->route()->getPrefix()) - 1)}} --}}
 
-    <div class="py-12">
-        <div class=" mx-auto sm:px-6 lg:px-8">
-            <div class="bg-slate-100 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-1 text-gray-900 dark:text-gray-100">
-                    <div class="row-start-1 col-span-full px-20 py-10">
-                        <div class="bg-white p-5">
+    <div class="py-10">
+        <div class=" mx-auto">
+            <div class="bg-slate-100 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="text-gray-900">
+                    <div class="row-start-1 col-span-full px-2">
+                        <div class="bg-white px-10 py-20">
                             <div class="flex flex-col">
                                 @if(!empty(session("success-edit")))
-                                    <div class="bg-green-200 text-green-700 text-lg font-bold text-center">{{ session('success-edit') }}</div>
+                                    <div id="flash" class="bg-green-200 text-green-700 text-lg font-bold text-center transition-opacity duration-1000">{{ session('success-edit') }}</div>
                                 @endif
+                                <script>
+                                    setTimeout(() => {
+                                        document.getElementById("flash").classList.toggle("opacity-0");
+                                    }, 4000);
+                                </script>
                                 <div id="info-akun" class="flex item-center gap-10">
                                     <div id="akun" class="flex flex-col gap-2 shadow-xl p-10">
                                         <div id="identitas-akun" class="flex flex-row gap-10 items-center bg-slate-200 px-5 py-2 rounded-lg">
@@ -28,7 +33,7 @@
                                             </div>
                                             <div id="nama-akun" class="text-lg font-bold bg-slate-200 px-10 py-5 text-center flex flex-col gap-5">
                                                 @if(Auth::check())
-                                                    <div id="nama" class="">{{Auth::user()->email}}</div>
+                                                    <div id="nama" class="">{{Auth::user()->name}}</div>
                                                 @endif
                                                 <div id="btn-edit" class="bg-cyan-400 hover:bg-cyan-700  px-5 py-1 self-start rounded-lg">
                                                     <a href="{{route(substr(request()->route()->getPrefix(), 1, strlen(request()->route()->getPrefix()) - 1).'.profile.edit')}}" class="px-5 py-2 hover:text-black">Edit</a>

@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Staf;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -23,17 +24,16 @@ class ProfileController extends Controller
         return view("edit-page");
     }
 
-    public function saveEdit(Request $request){
-
+    public function saveProfile(Request $request){
         $data_exists = Storage::disk("public")->exists($request->gambarUrl->getClientOriginalName());
-        if($data_exists){
+        if(!$data_exists){
             Storage::disk("public")->put("images/". $request->gambarUrl->getClientOriginalName(), file_get_contents($request->gambarUrl->getRealPath()));
         }
-        Staf::where(["nama" => $request->nama])->update([
-            "nama" => $request->nama,
-            "gambarUrl" => "storage/images/".$request->gambarUrl
+        User::where(["email" => Auth::guard('web')->user()->email])->update([
+            // "name" => $request->name,
+            "gambarUrl" => "storage/images/".$request->gambarUrl->getClientOriginalName()
         ]);
-        return redirect()->route("profile.index")->with(["success-edit"=> "Perubahan akun berhasil diterapkan"]);
+        return redirect()->route(Auth::guard('web')->user()->role.".profile.index")->with(["success-edit"=> "Perubahan akun berhasil diterapkan"]);
     }
     /**
      * Display the user's profile form.

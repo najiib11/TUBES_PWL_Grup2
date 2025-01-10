@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('stafs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 60);
-            $table->string('peran', 30);
+            $table->foreignId("id_user")->constrained()->references("id")->on("users")->onUpdate("cascade")->onDelete("cascade");
             $table->string("penjualan", 30);
             $table->string("rating", 3);
             $table->timestamps();

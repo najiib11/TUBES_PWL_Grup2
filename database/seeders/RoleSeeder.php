@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class RoleSeeder extends Seeder
 {
@@ -18,6 +20,8 @@ class RoleSeeder extends Seeder
         Role::create(["name" => "supervisor"]);
         Role::create(["name" => "cashier"]);
         Role::create(["name" => "warehouse"]);
-        Role::create(["name" => "kepala_toko"]);
+        Role::create(["name" => "owner"]);
+
+        
     }
 }

@@ -14,7 +14,7 @@
                         <div class="bg-white p-6 rounded-lg shadow-lg">
                             <h2 class="text-xl font-bold mb-2">Managemen Pengguna</h2>
                             <p class="text-gray-700">Manager, role, dan izin.</p>
-                            <a href="{{ route('role.edit')}}" class="text-blue-500 mt-4 inline-block">Go to Managemen Pengguna</a>
+                            <a href="{{ route('admin.list')}}" class="text-blue-500 mt-4 inline-block">Go to Managemen Pengguna</a>
                         </div>
 
                         <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -24,8 +24,8 @@
                         </div>
 
                         <div class="bg-white p-6 rounded-lg shadow-lg">
-                            <h2 class="text-xl font-bold mb-2">Pengaturan</h2>
-                            <p class="text-gray-700">Konfigurasi pengaturan dan konferensi Sistem</p>
+                            <h2 class="text-xl font-bold mb-2">Pengaturan Akun</h2>
+                            <p class="text-gray-700">Konfigurasi pengaturan akun</p>
                             <a href="{{route('admin.profile.index')}}" class="text-blue-500 mt-4 inline-block">Pergi Ke Pengaturan</a>
                         </div>
                     </div>

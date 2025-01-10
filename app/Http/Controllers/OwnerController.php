@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Staf;
 use Illuminate\Http\Request;
 
-class KepalaTokoController extends Controller
+class OwnerController extends Controller
 {
     public function index(){
-        return view("kepala_toko");
+        return view("owner");
     }
 
     public function inputDataStaf(){
-        return view("kepala_toko.input-staf", );
+        return view("owner.input-staf");
     }
 
     public function inputDataProses(Request $request){
