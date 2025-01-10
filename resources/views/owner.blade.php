@@ -1,7 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
+<<<<<<< HEAD:resources/views/kepala_toko.blade.php
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('owner') }}
+=======
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Owner') }}
+>>>>>>> f8ac8ce8e8f819d2b718d71ff03b81e67d16eb90:resources/views/owner.blade.php
         </h2>
     </x-slot>
 
@@ -20,7 +25,7 @@
                 }, 4000);
             </script>
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6 text-gray-900">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
 
                         <div class="bg-white p-6 rounded-lg shadow-lg">

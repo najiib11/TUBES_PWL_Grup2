@@ -1,20 +1,24 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Tambah Produk') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Edit Produk') }}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6 text-gray-900 ">
                     <div class="container mt-5">
                         {{-- <h2 class="text-5xl font-bold py-10 text-center">Input Data Produk</h2> --}}
-                        <form id="barangForm" action="{{ route('gudang.data.save') }}" method="POST">
+                        <form id="barangForm" action="{{ route('gudang.edit.save') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="namaBarang">Nama Produk :</label>
-                                <input type="text" class="form-control" name="name" id="namaBarang" >
+                                <select type="text" class="form-control" name="name" id="namaBarang" >
+                                    @foreach($product as $products)
+                                        <option value="{{$products->name}}">{{$products->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="hargaBarang">Harga Produk :</label>
@@ -28,10 +32,8 @@
                                 <label for="jumlahBarang">Tanggal Kadaluarsa :</label>
                                 <input type="date" class="form-control" name="tgl_kadaluarsa" id="jumlahBarang" >
                             </div>
-                            <div>
-                                <input type="submit" class="btn btn-primary" value="Simpan">
-                                <a href="{{route('gudang.index')}}" class="btn btn-primary">Kembali</a>
-                            </div>
+                            <input type="submit" class="btn btn-primary" value="Simpan">
+                            <a href="{{route('gudang.index')}}" class="btn btn-primary">Kembali</a>
 
                         </form>
                         <div id="responseMessage" class="mt-3"></div>
