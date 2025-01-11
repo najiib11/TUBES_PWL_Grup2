@@ -19,8 +19,8 @@
                     getFlash.classList.toggle("opacity-0");
                 }, 4000);
             </script>
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
                     <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
                         <h2 class="text-xl font-bold mb-4">Tambahkan Transaksi</h2>
                         <form action="{{route('kasir.tambah')}}" method="POST">
@@ -28,22 +28,22 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <label class="block text-gray-700">Nama Produk</label>
-                                    <input type="text" name="name" class="w-full p-2 border border-gray-300 rounded mt-1">
+                                    <input type="text" name="name" class="w-full p-2 border border-gray-300 rounded mt-1" required>
                                 </div>
                                 <div>
                                     <label class="block text-gray-700">Kuantitas</label>
-                                    <input type="number" name="stock" class="w-full p-2 border border-gray-300 rounded mt-1">
+                                    <input type="number" name="stock" class="w-full p-2 border border-gray-300 rounded mt-1" required>
                                 </div>
                                 <div>
                                     <label class="block text-gray-700">Harga</label>
-                                    <input type="text" name="price" class="w-full p-2 border border-gray-300 rounded mt-1">
+                                    <input type="text" name="price" class="w-full p-2 border border-gray-300 rounded mt-1" required>
                                 </div>
                                 {{-- <div>
                                     <label class="block text-gray-700">Total</label>
                                     <input type="text" class="w-full p-2 border border-gray-300 rounded mt-1" readonly>
                                 </div> --}}
                             </div>
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Transaksi</button>
+                            <input type="submit" class="bg-blue-500 text-white px-4 py-2 rounded" value="Tambah Transaksi">
                         </form>
                     </div>
 
@@ -66,8 +66,8 @@
 
                                     <td class="border px-4 py-2">{{$product->name}}</td>
                                     <td class="border px-4 py-2">{{$product->stock}}</td>
-                                    <td class="border px-4 py-2">RP.{{$product->price}}</td>
-                                    <td class="border px-4 py-2">RP.{{$product->price * $product->stock}}</td>
+                                    <td class="border px-4 py-2">RP.{{number_format($product->price, 2, ',', '.')}}</td>
+                                    <td class="border px-4 py-2">RP.{{number_format($product->price * $product->stock, 2, ',', '.')}}</td>
 
                                 </tr>
                                 @endforeach

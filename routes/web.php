@@ -8,7 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
+use App\Http\Controllers\PembeliController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +25,12 @@ Route::get('/', function () {
 //     Route::get('{role}/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 //     Route::delete('{role}/profile/save', [ProfileController::class, 'destroy'])->name('profile.save');
 // });
+
+Route::controller(PembeliController::class)->prefix("pembeli")->group(function(){
+    Route::get("/", "viewPembeli")->name("pembeli.index");
+    Route::get("input/{name}", "viewInputPembeli")->name("pembeli.input");
+    ROute::get("input/save/{name}", "inputPembelian")->name("pembeli.save");
+});
 
 Route::middleware(["auth", "role:admin"])->prefix("admin")->group(callback: function (){
     Route::get("/", [AdminController::class, "index"])->name("admin.index");

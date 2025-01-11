@@ -2,23 +2,23 @@
 
 namespace App\Models;
 
-use App\Models\User;
+use App\Models\Product;
 
 use Illuminate\Database\Eloquent\Model;
 
 class TransactionItem extends Model
 {
-    protected $table = "transactions";
+    protected $table = "transaction_items";
 
     protected $fillable = [
         "store_id",
-        "user_id",
-        "total",
-        "tgl_pembelian",
+        "product_id",
+        "quantity",
+        "price",
     ];
 
     public function User(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Product::class, "product_id");
     }
 
 
