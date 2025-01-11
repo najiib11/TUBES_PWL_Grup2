@@ -52,7 +52,7 @@
                                     <td class="border px-4 py-2">{{$products->created_at}}</td>
                                     <td class="border px-4 py-2">{{$products->name}}</td>
                                     <td class="border px-4 py-2">{{$products->stock}}</td>
-                                    <td class="border px-4 py-2">{{$products->price}}</td>
+                                    <td class="border px-4 py-2">{{number_format($products->price, 2, ",", ".")}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

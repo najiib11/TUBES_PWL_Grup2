@@ -18,21 +18,14 @@ class WarehouseController extends Controller
     }
 
     public function saveData(Request $request){
-        $stock = null;
+        $product = null;
         $check_product = Product::where("name", $request->name);
-        if($check_product){
-            $check_product->update(["stock" => $request->stock]);
-        }
-        else{
+        if(empty(($check_product->pluck("id"))[0])){
             $product = Product::create($request->all());
-            $productId =  Product::where("name", $request->name)->pluck("id");
-            $stockProduct = Product::where("name", $request->name)->pluck("stock");
-            $stock = Product::find($productId[0])->StockMovement()->create([
-            "product_id" => $productId[0],
-            "quantity" => $stockProduct[0],
-        ]);
-        }  
-        return redirect()->back()->with(["success-save" => "Data berhasil disimpan"]);
+            return redirect()->route("gudang.index")->with(["success-save" => "Data berhasil disimpan"]);
+        }
+        return redirect()->route('gudang.index')->with(["gagal-save" => "Data sudah ada"]);
+        
     }
 
     public function editData(){

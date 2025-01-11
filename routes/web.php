@@ -26,10 +26,14 @@ Route::get('/', function () {
 //     Route::delete('{role}/profile/save', [ProfileController::class, 'destroy'])->name('profile.save');
 // });
 
-Route::controller(PembeliController::class)->prefix("pembeli")->group(function(){
-    Route::get("/", "viewPembeli")->name("pembeli.index");
-    Route::get("input/{name}", "viewInputPembeli")->name("pembeli.input");
-    ROute::get("input/save/{name}", "inputPembelian")->name("pembeli.save");
+Route::middleware(["auth", "role:pembeli"])->prefix("pembeli")->group(function(){
+    Route::get("/", [PembeliController::class, "viewPembeli"])->name("pembeli.index");
+    Route::get("input/{name}/{harga}/{stok}", [PembeliController::class, "viewInputPembeli"])->name("pembeli.input");
+    Route::post("input/save/{name}", [PembeliController::class, "inputPembelian"])->name("pembeli.save");
+    Route::get('profile', [ProfileController::class, 'index'])->name('pembeli.profile.index');
+    Route::get('profile/edit', [ProfileController::class, 'edit'])->name('pembeli.profile.edit');
+    Route::post('profile/save', [ProfileController::class, 'saveProfile'])->name('pembeli.profile.save');
+    Route::get("list/delete/{id}", [PembeliController::class, "deleteUser"])->name("admin.delete");
 });
 
 Route::middleware(["auth", "role:admin"])->prefix("admin")->group(callback: function (){

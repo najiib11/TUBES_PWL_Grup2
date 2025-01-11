@@ -19,17 +19,17 @@ class DatabaseSeeder extends Seeder
 
 
 
-        DB::table('products')->insert([
-            ['name' => 'Kopi Kapal Api',    'price' => 10000, 'stock'=> 1 , 'created_at'=> now(), 'updated_at'=> now()],
-            ['name' => 'Kopi Creamy Latte', 'price' => 20000, 'stock' => 1, 'created_at'=> now(), 'updated_at'=> now()],
-            ['name' => 'Kopi Gula Aren',    'price' => 50000, 'stock' => 1, 'created_at'=> now(), 'updated_at'=> now()],
-            ['name' => 'Kopi Good Day',     'price' => 30000, 'stock' => 1, 'created_at'=> now(), 'updated_at'=> now()],
-            ['name' => 'Kopi Indocafe',     'price' => 40000, 'stock'=> 1 , 'created_at'=> now(), 'updated_at'=> now()],
-        ]);
+        // DB::table('products')->insert([
+        //     ['name' => 'Kopi Kapal Api',    'price' => 10000, 'stock'=> 1 , 'created_at'=> now(), 'updated_at'=> now()],
+        //     ['name' => 'Kopi Creamy Latte', 'price' => 20000, 'stock' => 1, 'created_at'=> now(), 'updated_at'=> now()],
+        //     ['name' => 'Kopi Gula Aren',    'price' => 50000, 'stock' => 1, 'created_at'=> now(), 'updated_at'=> now()],
+        //     ['name' => 'Kopi Good Day',     'price' => 30000, 'stock' => 1, 'created_at'=> now(), 'updated_at'=> now()],
+        //     ['name' => 'Kopi Indocafe',     'price' => 40000, 'stock'=> 1 , 'created_at'=> now(), 'updated_at'=> now()],
+        // ]);
 
 
 
 
-        // $this->call([RoleSeeder::class, UserSeeder::class ]);
+        $this->call([RoleSeeder::class, UserSeeder::class ]);
     }
 }

@@ -12,8 +12,14 @@
                     @if(!empty(session("success-edit")))
                         <div id="flash" class="bg-green-200 text-green-700 text-lg font-bold text-center transition-opacity duration-1000 py-2">{{ session('success-edit') }}</div>
                     @endif
+                    @if(!empty(session("success-save")))
+                        <div id="flash" class="bg-green-200 text-green-700 text-lg font-bold text-center transition-opacity duration-1000 py-2">{{ session('success-save') }}</div>
+                    @endif
                     @if(!empty(session("fail-edit")))
                         <div id="flash" class="bg-red-200 text-red-700 text-lg font-bold text-center transition-opacity duration-1000 py-2">{{ session('fail-edit') }}</div>
+                    @endif
+                    @if(!empty(session("gagal-save")))
+                        <div id="flash" class="bg-red-200 text-red-700 text-lg font-bold text-center transition-opacity duration-1000 py-2">{{ session('gagal-save') }}</div>
                     @endif
                     <script>
                         setTimeout(() => {

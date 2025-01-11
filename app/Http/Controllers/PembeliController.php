@@ -17,11 +17,14 @@ class PembeliController extends Controller
     public function viewPembeli(){
         return view("pembeli", ["product" => Product::all()]);
     }
-    public function viewInputPembeli($name_product){
-        return view("pembeli.input", ["name" => $name_product]);
+    public function viewInputPembeli($name_product, $cost_product, $stok){
+        // dd($name_product);
+        return view("pembeli.input", ["name" => $name_product, "price" => $cost_product, "stok" => $stok]);
     }
     public function inputPembelian(Request $request, $name_product){
         $transaction = new Transaction();
+        $transactionItem = new TransactionItem();
+
         $store = Store::where(["id" => 1])->get(); 
         $user = User::where(["id" => 1])->get();
         $product = Product::where(["name" => $request->name])->get();
@@ -40,13 +43,24 @@ class PembeliController extends Controller
 
         foreach($product as $products){
             if($products){
-                $transaction->total = $products->price * $products->stock;
+                $transactionItem->product_id = $products->id;
+                $transactionItem->quantity = $request->quantity;
+                $transaction->total = $products->price * $transactionItem->quantity;
+                $transactionItem->price = $transaction->total;
+                $stock = intval($transactionItem->product->stock);
+                $kuantitas = intVal($request->quantity);
+                $stock -= $kuantitas;
+                Product::where(["name" => $request->name])->update(["stock" => strVal($stock)]);
             }
         }
 
         $transaction->save();
+        $transactionItem->transaction_id = $transaction->id;
+        $transactionItem->save();
+
         if($transaction){
-            
+            return redirect()->route('pembeli.index')->with(['success' => "Barang tersebut berhasil dipesan"]);
         }
+        dd("Gagal");
     }
 }

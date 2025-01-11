@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\TransactionItem;
 use Illuminate\Http\Request;
 
 class CashierController extends Controller
 {
     public function index(){
-        $products = Product::all();
-        return view("cashier" ,compact("products"));
+        $transactionItem = TransactionItem::all();
+        return view("cashier" ,compact("transactionItem"));
     }
 
     public function tambahData(Request $request){

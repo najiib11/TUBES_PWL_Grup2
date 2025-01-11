@@ -11,15 +11,20 @@ class TransactionItem extends Model
     protected $table = "transaction_items";
 
     protected $fillable = [
-        "store_id",
+        "transaction_id",
         "product_id",
         "quantity",
         "price",
     ];
 
-    public function User(){
+    public function product(){
         return $this->belongsTo(Product::class, "product_id");
     }
+
+    public function transaction(){
+        return $this->belongsTo(Transaction::class, "transaction_id");
+    }
+
 
 
 }
